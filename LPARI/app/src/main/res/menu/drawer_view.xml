@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/mainMenu" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_one"
@@ -15,7 +15,7 @@
             android:title="Third" />
     </group>
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/subMenu" android:checkableBehavior="single">
         <item android:title="Others">
             <menu>
                 <item

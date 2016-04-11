@@ -143,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Highlight the selected item, update the title, and close the drawer
         menuItem.setChecked(true);
+        //menuItem.setEnabled(true);
         setTitle(menuItem.getTitle());
         mDrawer.closeDrawers();
     }

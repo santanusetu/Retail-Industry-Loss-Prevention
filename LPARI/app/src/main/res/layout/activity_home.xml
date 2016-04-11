@@ -47,7 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextColor="@android:color/background_light"
+
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/drawer_view"
         app:headerLayout="@layout/nav_header_image"/>
 

@@ -1,7 +1,12 @@
 package com.sjsu.lpari.adapters;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +18,19 @@ import android.widget.Toast;
 import com.sjsu.lpari.R;
 
 
-public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickListener
-{
+public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickListener {
 
-    Context context;
+    private Context context;
     String[] dropNodata;
     String[] dropTime;
     String[] toteCount;
     String[] custName;
+
+    private TextView ph2;
+
     private static LayoutInflater inflater = null;
 
-    public CustomDeliveryAdapter(Context context, String[] dropNodata)
-    {
+    public CustomDeliveryAdapter(Context context, String[] dropNodata) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.dropNodata = dropNodata;
@@ -32,8 +38,7 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
     }
 
     public CustomDeliveryAdapter(Context context, String[] dropNodata, String[] dropTime,
-                                 String[] toteCount, String[] custName)
-    {
+                                 String[] toteCount, String[] custName) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.dropNodata = dropNodata;
@@ -45,25 +50,21 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return dropNodata.length;
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return dropNodata[position];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent)
-    {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         // TODO Auto-generated method stub
         View vi = convertView;
         if (vi == null) {
@@ -74,14 +75,15 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
         setDropNotext.setText(dropNodata[position]);
         TextView setDropTime = (TextView) vi.findViewById(R.id.tvDropTime);
         setDropTime.setText(dropTime[position]);
-      //  TextView setToteCount = (TextView) vi.findViewById(R.id.tvToteCount);
-       // setToteCount.setText(toteCount[position]);
+        //  TextView setToteCount = (TextView) vi.findViewById(R.id.tvToteCount);
+        // setToteCount.setText(toteCount[position]);
 
         TextView setCustName = (TextView) vi.findViewById(R.id.tvCustomerName);
         setCustName.setText(custName[position]);
 
         ImageView arrowButton = (ImageView) vi.findViewById(R.id.ivArrow);
         arrowButton.setOnClickListener(this);
+
        /* arrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +102,9 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
             }
         });*/
 
-       // ImageView n1 = (ImageView) vi.findViewById(R.id.ivNotify);
+        // ImageView n1 = (ImageView) vi.findViewById(R.id.ivNotify);
         TextView n2 = (TextView) vi.findViewById(R.id.tvNotify);
-
-       // n1.setOnClickListener(this);
+        // n1.setOnClickListener(this);
         n2.setOnClickListener(this);
 
         //ImageView od1 = (ImageView) vi.findViewById(R.id.ivOrderDetails);
@@ -112,26 +113,27 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
         //od1.setOnClickListener(this);
         //od2.setOnClickListener(this);
 
-      //  ImageView ch1 = (ImageView) vi.findViewById(R.id.ivCustHistory);
-       // TextView ch2 = (TextView) vi.findViewById(R.id.tvCustomerHist);
+        //  ImageView ch1 = (ImageView) vi.findViewById(R.id.ivCustHistory);
+        // TextView ch2 = (TextView) vi.findViewById(R.id.tvCustomerHist);
 
         //ch1.setOnClickListener(this);
         //ch2.setOnClickListener(this);
 
         ImageView ph1 = (ImageView) vi.findViewById(R.id.ivPhoneIcon);
-        TextView ph2 = (TextView) vi.findViewById(R.id.tvPhoneNo1);
-       // TextView ph3 = (TextView) vi.findViewById(R.id.tvPhoneNo2);
+        ph2 = (TextView) vi.findViewById(R.id.tvPhoneNo1);
+        // TextView ph3 = (TextView) vi.findViewById(R.id.tvPhoneNo2);
 
         ph1.setOnClickListener(this);
         ph2.setOnClickListener(this);
         //ph3.setOnClickListener(this);
 
+
         return vi;
     }
 
     public void onClick(final View v) {
-        switch(v.getId()) {
-          //  case R.id.ivNotify:
+        switch (v.getId()) {
+            //  case R.id.ivNotify:
             case R.id.tvNotify:
             case R.id.ivArrow:
                 Toast.makeText(v.getContext(), "Notify Clicked.", Toast.LENGTH_SHORT).show();
@@ -142,15 +144,21 @@ public class CustomDeliveryAdapter extends BaseAdapter implements View.OnClickLi
                 Toast.makeText(v.getContext(), "Order Details Clicked.", Toast.LENGTH_SHORT).show();
                 break;*/
 
-           // case R.id.ivCustHistory:
-           // case R.id.tvCustomerHist:
-             //   Toast.makeText(v.getContext(), "Customer History Clicked.", Toast.LENGTH_SHORT).show();
-              //  break;
+            // case R.id.ivCustHistory:
+            // case R.id.tvCustomerHist:
+            //   Toast.makeText(v.getContext(), "Customer History Clicked.", Toast.LENGTH_SHORT).show();
+            //  break;
 
             case R.id.ivPhoneIcon:
             case R.id.tvPhoneNo1:
-          //  case R.id.tvPhoneNo2:
-                Toast.makeText(v.getContext(), "Phone Clicked.", Toast.LENGTH_SHORT).show();
+                //  case R.id.tvPhoneNo2:
+                Toast.makeText(v.getContext(), "Phone Clicked." + ph2.getText(), Toast.LENGTH_SHORT).show();
+
+                // Write your code here to execute after dialog
+                String number = "tel:" + ph2.getText().toString().trim();
+                Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+                context.startActivity(callIntent);
+
                 break;
         }
     }

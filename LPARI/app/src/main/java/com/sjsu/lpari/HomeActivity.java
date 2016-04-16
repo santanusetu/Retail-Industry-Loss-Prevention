@@ -1,5 +1,6 @@
 package com.sjsu.lpari;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.Toast;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -30,8 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //For Testing purpose -- commented
-         //Intent intent = new Intent(this, LoginActivity.class);
-         //startActivity(intent);
+        // Intent intent = new Intent(this, LoginActivity.class);
+        // startActivity(intent);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -187,4 +188,22 @@ public class HomeActivity extends AppCompatActivity {
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
     }
+
+
+
+   /* @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //Toast.makeText(this, "Toast Scanned HOME ACTIVITY", Toast.LENGTH_SHORT).show();
+
+       // if (requestCode == 12345) {
+            Toast.makeText(this, " Scanned ABCD ", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Toast Scanned ", Toast.LENGTH_SHORT).show();
+            // Handle successful scan
+
+        //}
+    }*/
+
 }

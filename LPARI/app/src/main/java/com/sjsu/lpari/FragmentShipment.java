@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.sjsu.lpari.adapters.CustomDeliveryAdapter;
 
@@ -49,6 +53,26 @@ public class FragmentShipment extends Fragment {
        // listview.setAdapter(new CustomDeliveryAdapter(this, dropNo, deliveryTime, toteCount, custName));
 
         listview.setAdapter(new CustomDeliveryAdapter(getActivity(), dropNo, deliveryTime, toteCount, custName));
+
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                String value = (String) adapter.getItemAtPosition(position);
+                // assuming string and if you want to get the value on click of list item
+                // do what you intend to do on click of listview row
+           //     Toast.makeText(v.getContext(), "ListView Clicked "+value, Toast.LENGTH_SHORT).show();
+
+                Fragment fragment = new FragmentDetailsShipment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContent, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
         return  rootView;
     }
 

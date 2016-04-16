@@ -25,14 +25,18 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView nvDrawer;
     ActionBarDrawerToggle drawerToggle;
 
+    public static  boolean isLoggedIn = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         //For Testing purpose -- commented
-        // Intent intent = new Intent(this, LoginActivity.class);
-        // startActivity(intent);
+
+        if (!isLoggedIn) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

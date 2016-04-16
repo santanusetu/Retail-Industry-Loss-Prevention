@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +74,14 @@ public class ItemDeliveryRecyclerAdapter extends  RecyclerView.Adapter<ItemDeliv
         holder.tvDeliveryItem.setText(fp.getTitle());
         holder.tvCategoryDeliveryItem.setText(fp.getCategory());
         holder.tvInstructions.setText(fp.getInstructions());
+
+
+        if(fp.getIsScanned()) {
+            holder.itemCard.setCardBackgroundColor(Color.parseColor("#99ffbb"));
+        }else{
+            //
+        }
+
         holder.item_feed = fp;
 
 
@@ -98,6 +107,8 @@ public class ItemDeliveryRecyclerAdapter extends  RecyclerView.Adapter<ItemDeliv
         public ImageView iconDeliveryItem;
         public TextView tvDeliveryItem, tvCategoryDeliveryItem, tvInstructions, tvSpclIns;
 
+        public CardView itemCard;
+
         public DeliveryItem item_feed;
 
         public RecyclerViewHolderItemDelivery(final View itemLayoutView, final Fragment fmt) {
@@ -109,6 +120,7 @@ public class ItemDeliveryRecyclerAdapter extends  RecyclerView.Adapter<ItemDeliv
             tvCategoryDeliveryItem = (TextView) itemLayoutView.findViewById(R.id.tvItemCategory);
             tvInstructions = (TextView) itemLayoutView.findViewById(R.id.tvInstructions);
             tvSpclIns = (TextView) itemLayoutView.findViewById(R.id.tvCtPhoneNo);
+            itemCard = (CardView) itemLayoutView.findViewById(R.id.card_view_item_delivery);
 
             itemLayoutView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,6 +131,8 @@ public class ItemDeliveryRecyclerAdapter extends  RecyclerView.Adapter<ItemDeliv
 
                     Intent intent = new Intent(v.getContext(), SimpleScannerActivity.class);
 
+                    System.out.println("@@@@ adapter position "+ getAdapterPosition());
+                      intent.putExtra("adapterPosition", getAdapterPosition());
                      //((Activity) v.getContext()).startActivityForResult(intent, 12345);
                     fmt.startActivityForResult(intent, 12345);
 

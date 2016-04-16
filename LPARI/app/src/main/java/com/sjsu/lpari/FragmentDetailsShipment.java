@@ -92,10 +92,10 @@ public class FragmentDetailsShipment extends Fragment {
                 startActivity(intent);*/
 
                 //for testing
-              //  String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?saddr=%f,%f(%s)&daddr=%f,%f (%s)", srcLatitude, srcLongitude, "Start Delivery", destLat, destLong, "Santanu Chakraborty");
-             //   Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-              //  intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-               // startActivity(intent);
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?saddr=%f,%f(%s)&daddr=%f,%f (%s)", srcLatitude, srcLongitude, "Start Delivery", destLat, destLong, "Santanu Chakraborty");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
 
                 startDelivery.setVisibility(View.GONE);
                 endDelivery.setVisibility(View.VISIBLE);

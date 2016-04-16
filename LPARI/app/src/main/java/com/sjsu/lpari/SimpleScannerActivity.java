@@ -13,9 +13,11 @@ public class SimpleScannerActivity extends Activity implements ZXingScannerView.
 
     private ZXingScannerView mScannerView;
 
+    int position = 0;
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
+        position = getIntent().getIntExtra("adapterPosition", 0);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
     }
@@ -46,8 +48,14 @@ public class SimpleScannerActivity extends Activity implements ZXingScannerView.
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("result", 12345);
+        returnIntent.putExtra("position", position);
 
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
     }
 }

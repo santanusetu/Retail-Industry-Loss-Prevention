@@ -32,7 +32,7 @@
             android:textColor="@android:color/darker_gray"
             android:layout_marginBottom="16dp"
             android:layout_alignParentBottom="true"
-            android:text="Agreement" />
+            android:text="Acknowledgement of Delivery" />
 
         <com.github.gcacace.signaturepad.views.SignaturePad
             android:layout_width="fill_parent"
@@ -52,16 +52,22 @@
             android:id="@+id/clear_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Clear Pad"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="#BB2B82FF"
+            android:text="Clear Signature"
             android:enabled="false" />
 
         <Button
             android:id="@+id/save_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Save Signature"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:text="Accept Signature"
+            android:background="#BB2B82FF"
+            android:textColor="@color/white"
             android:enabled="false" />
     </LinearLayout>
 

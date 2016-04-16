@@ -80,10 +80,12 @@ public class FragmentItemDelivery extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(v.getContext(), "Delivery Item is ready ", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(v.getContext(), "Delivery Item is ready ", Toast.LENGTH_SHORT).show();
 
-                //  Intent intent = new Intent(v.getContext(), SignatureActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(v.getContext(), SignatureActivity.class);
+                startActivity(intent);
+
+
             }
         });
 
@@ -99,7 +101,23 @@ public class FragmentItemDelivery extends Fragment implements View.OnClickListen
         if (requestCode == 12345) {
 
                 // Handle successful scan
-               Toast.makeText(getActivity(), "Toast Scanned QWERTY -> ", Toast.LENGTH_SHORT).show();
+             //  Toast.makeText(getActivity(), "Toast Scanned QWERTY -> ", Toast.LENGTH_SHORT).show();
+
+               System.out.println("@@@@ adapter position " + data.getIntExtra("position", 0));
+               int pos = data.getIntExtra("position",0);
+               item_list.get(pos).setIsScanned(true);
+               adapter.notifyDataSetChanged();
+
+            int count = 0;
+            for (int i=0; i < item_list.size(); i++){
+                if(item_list.get(i).getIsScanned()){
+                    count += 1;
+                }
+            }
+
+            if(count >= item_list.size()){
+                deliverViewButton.setVisibility(View.VISIBLE);
+            }
         }
     }
 

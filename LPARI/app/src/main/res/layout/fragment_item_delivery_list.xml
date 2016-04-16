@@ -68,6 +68,7 @@
         android:background="#BB2B82FF"
         android:textColor="@color/white"
         android:elevation="20dp"
-        android:text="Ready to Deliver"/>
+        android:text="Ready to Deliver"
+        android:visibility="gone"/>
 
 </RelativeLayout>

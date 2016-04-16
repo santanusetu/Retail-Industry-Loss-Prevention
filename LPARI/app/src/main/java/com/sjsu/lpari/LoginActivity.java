@@ -82,6 +82,9 @@ public class LoginActivity extends Activity{
 
     private void onLoginSuccess() {
         loginButton.setEnabled(true);
+
+        HomeActivity.isLoggedIn = true;
+
         finish();
     }
 

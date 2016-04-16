@@ -38,7 +38,7 @@ public class SignatureActivity extends Activity{
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(getApplicationContext(), "OnStartSigning", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -67,20 +67,39 @@ public class SignatureActivity extends Activity{
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if(addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(getApplicationContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Signature saved", Toast.LENGTH_SHORT).show();
+
+                    finishAllWorks();
+
                 } else {
-                    Toast.makeText(getApplicationContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Unable to capture the signature", Toast.LENGTH_SHORT).show();
                 }
                 if(addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(getApplicationContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "SVG Signature saved", Toast.LENGTH_SHORT).show();
+                    finishAllWorks();
+
                 } else {
-                    Toast.makeText(getApplicationContext(), "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Unable to capture the SVG signature", Toast.LENGTH_SHORT).show();
                 }
             }
+
+
         });
     }
+
+
+
+    private void finishAllWorks() {
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
+
 
     public File getAlbumStorageDir(String albumName) {
         // Get the directory for the user's public pictures directory.
